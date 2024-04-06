@@ -54,7 +54,11 @@ class Ticket extends Model
 
     public function getUser()
     {
-        return User::find($this->user_id)->name;
+        return User::find($this->user_id)->nom_complet;
+    }
+    public function getUserEmail()
+    {
+        return User::find($this->user_id)->email;
     }
     public function getPriorite()
     {

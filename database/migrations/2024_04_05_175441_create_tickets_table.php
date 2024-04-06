@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('priorite_id');
             $table->unsignedBigInteger('statut_id');
             $table->unsignedBigInteger('categorie_id');
-            $table->unsignedBigInteger('assigned_to');
+            $table->unsignedBigInteger('assigned_to')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('priorite_id')->references('id')->on('priorites');
             $table->foreign('statut_id')->references('id')->on('statuts');
