@@ -43,9 +43,9 @@
                 <td class="px-6 py-3 text-left text-base font-medium border border-gray-400 tracking-wider">
                   {{ $priorite->nom }}</td>
                 <td
-                  class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-2 text-center">
-                  <a href="{{ route('edit-priorite', ['id'=>$priorite->id]) }}" class="text-white text-base font-medium bg-[#4DA845] rounded-lg py-1 edit-btn">Edit</a>
-                  <form action="{{ route('delete-priorite', ['id'=>$priorite->id]) }}" method="POST">
+                  class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider flex justify-between gap-2 text-center">
+                  <a href="{{ route('edit-priorite', ['id'=>$priorite->id]) }}" class="text-white text-base font-medium bg-[#4DA845] rounded-lg py-1 w-1/2">Edit</a>
+                  <form action="{{ route('delete-priorite', ['id'=>$priorite->id]) }}" class="w-1/2" method="POST">
                     @csrf
                     @method('DELETE')
                     <input type="submit" value="Delete" class="text-white w-full py-1 text-base font-medium bg-[#DC3544] rounded-lg cursor-pointer"/>

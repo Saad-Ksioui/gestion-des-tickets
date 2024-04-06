@@ -40,7 +40,7 @@
                   {{ $user->email }}</td>
                 <td class="px-6 py-3 text-left text-base font-medium border border-gray-400 tracking-wider">
                   {{ $user->getRole('role_id') }}</td>
-                <td class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider grid grid-cols-2 gap-2 text-center">
+                <td class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-2 text-center">
                   <a href="#" class="text-white text-base font-medium bg-[#4280b7] rounded-lg">View</a>
                   <a href="#" class="text-white text-base font-medium bg-[#4DA845] rounded-lg">Edit</a>
                   <a href="#" class="text-white text-base font-medium bg-[#DC3544] rounded-lg">Delete</a>
