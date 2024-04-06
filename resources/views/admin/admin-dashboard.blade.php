@@ -1,3 +1,18 @@
+@php
+  $statutColor = [
+      'Open' => ['bg-[#4DBD75]', 'text-[#256B3D]'],
+      'In Progress' => ['bg-[#20A8D8]', 'text-[#0F4C75]'],
+      'Closed' => ['bg-[#F86C6B]', 'text-[#92231A]'],
+      'Issued' => ['bg-[#F8991D]', 'text-[#5E4B15]'],
+  ];
+
+  $prioriteColor = [
+      'High' => ['bg-[#F86C6B]', 'text-[#92231A]'],
+      'Medium' => ['bg-[#F8991D]', 'text-[#5E4B15]'],
+      'Low' => ['bg-[#20A8D8]', 'text-[#0F4C75]'],
+  ];
+
+@endphp
 @extends('layout.admin-layout')
 @section('content')
   <div class="main">
@@ -5,36 +20,37 @@
       <div class="dashboard w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
         <h1 class="text-2xl font-medium ">Dashboard</h1>
         <div class="cards grid grid-cols-4 gap-4">
-          <div class="card bg-[#20A8D8] p-7 border border-[#177EA1] rounded-lg">
-            <div class="number text-xl text-white font-medium">
-              {{ $tickets->count() }}
-            </div>
-            <div class="text text-xl text-white font-medium">
-              Total Tickets
-            </div>
-          </div>
+
           <div class="card bg-[#4DBD75] p-7 border border-[#389457] rounded-lg">
             <div class="number text-xl text-white font-medium">
               {{ $tickets->where('statut_id', 1)->count() }}
             </div>
             <div class="text text-xl text-white font-medium">
-              Open Tickets
+              {{ $statuts->where('id', 1)->first()->nom }} Tickets
             </div>
           </div>
-          <div class="card bg-[#F86C6B] p-7 border border-[#F6302E] rounded-lg">
+          <div class="card bg-[#20A8D8] p-7 border border-[#177EA1] rounded-lg">
             <div class="number text-xl text-white font-medium">
               {{ $tickets->where('statut_id', 2)->count() }}
             </div>
             <div class="text text-xl text-white font-medium">
-              Closed Tickets
+              {{ $statuts->where('id', 2)->first()->nom }} Tickets
             </div>
           </div>
-          <div class="card bg-[#F8991D] p-7 border border-[#795627] rounded-lg">
+          <div class="card bg-[#F86C6B] p-7 border border-[#F6302E] rounded-lg">
             <div class="number text-xl text-white font-medium">
               {{ $tickets->where('statut_id', 3)->count() }}
             </div>
             <div class="text text-xl text-white font-medium">
-              Issued Tickets
+              {{ $statuts->where('id', 3)->first()->nom }} Tickets
+            </div>
+          </div>
+          <div class="card bg-[#F8991D] p-7 border border-[#795627] rounded-lg">
+            <div class="number text-xl text-white font-medium">
+              {{ $tickets->where('statut_id', 4)->count() }}
+            </div>
+            <div class="text text-xl text-white font-medium">
+              {{ $statuts->where('id', 4)->first()->nom }} Tickets
             </div>
           </div>
         </div>
@@ -96,10 +112,27 @@
                   </a>
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  {{ $ticket->getStatut('status_id') }}
+                  <span></span><span
+                    class="{{ isset($statutColor[$ticket->getStatut('status_id')])
+                        ? $statutColor[$ticket->getStatut('status_id')][0] .
+                            ' ' .
+                            $statutColor[$ticket->getStatut('status_id')][1] .
+                            ' rounded-lg px-2 py-1 font-semibold'
+                        : '' }}">
+                    {{ $ticket->getStatut('status_id') }}
+                  </span>
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  {{ $ticket->getPriorite('priorite_id') }}
+                  <span
+                    class="{{ isset($prioriteColor[$ticket->getPriorite('priorite_id')])
+                        ? $prioriteColor[$ticket->getPriorite('priorite_id')][0] .
+                            ' ' .
+                            $prioriteColor[$ticket->getPriorite('priorite_id')][1] .
+                            ' rounded-lg px-2 py-1 font-semibold'
+                        : '' }}">
+                    {{ $ticket->getPriorite('priorite_id') }}
+                  </span>
+
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   {{ $ticket->getCategorie('categorie_id') }}
@@ -113,7 +146,8 @@
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   {{ $ticket->assigned_to }}
                 </td>
-                <td class="px-6 py-3 text-center text-xs font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-1">
+                <td
+                  class="px-6 py-3 text-center text-xs font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-1">
                   <a href="#" class="p-2 text-white text-xs font-medium bg-[#4280b7] rounded-lg">View</a>
                   <a href="#" class="p-2 text-white text-xs font-medium bg-[#4DA845] rounded-lg">Edit</a>
                   <a href="#" class="p-2 text-white text-xs font-medium bg-[#DC3544] rounded-lg">Delete</a>
