@@ -35,7 +35,7 @@
             <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Se connecter
             </h1>
-            <form class="space-y-4 md:space-y-6" action="{{ route('login') }}" method="post">
+            <form class="space-y-4 md:space-y-6" action="{{ route('authenticate') }}" method="post">
               @csrf
               <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>

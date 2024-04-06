@@ -1,4 +1,4 @@
-@extends('admin.layout.admin-layout')
+@extends('layout.admin-layout')
 @section('content')
   @if (session()->has('success'))
     <div id="Alert" class="py-4 px-4 text-lg font-semibold text-white bg-green-600 absolute right-1 top-1 m-2">

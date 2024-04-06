@@ -1,4 +1,4 @@
-@extends('admin.layout.admin-layout')
+@extends('layout.admin-layout')
 @section('content')
   <div class="list-users">
     <div class="content pt-6 w-[95%] mx-auto my-5 flex flex-col gap-11">
