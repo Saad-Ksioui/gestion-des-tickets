@@ -92,10 +92,6 @@
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
                 Assigned To
               </th>
-              <th scope="col"
-                class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Operation
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -146,17 +142,13 @@
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   {{ $ticket->assigned_to }}
                 </td>
-                <td
-                  class="px-6 py-3 text-center text-xs font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-1">
-                  <a href="#" class="p-2 text-white text-xs font-medium bg-[#4280b7] rounded-lg">View</a>
-                  <a href="#" class="p-2 text-white text-xs font-medium bg-[#4DA845] rounded-lg">Edit</a>
-                  <a href="#" class="p-2 text-white text-xs font-medium bg-[#DC3544] rounded-lg">Delete</a>
-                </td>
               </tr>
             @endforeach
           </tbody>
         </table>
-
+        <div class="flex justify-end mt-2">
+          <a href="#" class="py-2 px-4 bg-black text-white font-medium rounded-md hover:shadow-md">Show all</a>
+        </div>
       </div>
     </div>
   </div>

@@ -13,6 +13,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/list-users', [AdminController::class, 'listUsers'])->name('list-users');
     Route::get('/create-user', [AdminController::class, 'createUser'])->name('create-user');
     Route::post('/store-user', [AdminController::class, 'storeUser'])->name('store-user');
+
     Route::get('/list-statuts', [AdminController::class, 'listStatuts'])->name('list-statuts');
     Route::post('/store-statut', [AdminController::class, 'storeStatut'])->name('store-statut');
     Route::get('/edit-statut/{id}', [AdminController::class, 'editStatut'])->name('edit-statut');
@@ -24,6 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-priorite/{id}', [AdminController::class, 'editPriorite'])->name('edit-priorite');
     Route::put('/update-priorite/{id}', [AdminController::class, 'updatePriorite'])->name('update-priorite');
     Route::delete('/delete-priorite/{id}', [AdminController::class, 'deletePriorite'])->name('delete-priorite');
+
+    Route::get('/list-categories', [AdminController::class, 'listCategories'])->name('list-categories');
+    Route::post('/store-categorie', [AdminController::class, 'storeCategorie'])->name('store-categorie');
+    Route::get('/edit-categorie/{id}', [AdminController::class, 'editCategorie'])->name('edit-categorie');
+    Route::put('/update-categorie/{id}', [AdminController::class, 'updateCategorie'])->name('update-categorie');
+    Route::delete('/delete-categorie/{id}', [AdminController::class, 'deleteCategorie'])->name('delete-categorie');
 });
 
 Route::get('/', function(){

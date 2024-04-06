@@ -93,10 +93,15 @@
               </span>
 
             </li>
-            <li class="cursor-pointer block px-7 py-3.5 hover:bg-[#3A4248] hover:text-white">
+            <li class="cursor-pointer block px-7 py-3.5
+              {{ request()->route()->getName() === 'list-categories' ||
+              request()->route()->getName() === 'edit-categorie'
+                ? 'bg-white text-black'
+                : 'hover:bg-[#3A4248] hover:text-white' }}">
+
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-tags"></i>
-                <a href="#" class="block">
+                <a href="{{ route('list-categories') }}" class="block">
                   Categories
                 </a>
               </span>

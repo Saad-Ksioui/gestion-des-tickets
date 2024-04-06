@@ -44,4 +44,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+/* Create Categorie */
+document.addEventListener("DOMContentLoaded", function() {
+  let openCreateCategorieModalBtn = document.getElementById(
+    "openCreateCategorieModalBtn"
+  );
+  let createCategoriesModal = document.getElementById("createCategoriesModal");
+  let closeBtn = createCategoriesModal.querySelector(".close");
+
+  function openCreateCategoriesModal() {
+    createCategoriesModal.style.display = "block";
+  }
+
+  function closeCreateCategoriesModal() {
+    createCategoriesModal.style.display = "none";
+  }
+  openCreateCategorieModalBtn.addEventListener("click", openCreateCategoriesModal);
+  closeBtn.addEventListener("click", closeCreateCategoriesModal);
+  window.addEventListener("click", function(event) {
+    if (event.target == createCategoriesModal) {
+      closeCreateCategoriesModal();
+    }
+  });
+});
 

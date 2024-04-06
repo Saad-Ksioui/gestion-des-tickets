@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Statut;
 use App\Models\Ticket;
 use App\Models\Priorite;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +20,7 @@ class AdminController extends Controller
         $tickets = Ticket::all();
         return view('admin.admin-dashboard', compact('tickets', 'statuts'));
     }
+    //!/* User Management */
     public function createUser()
     {
         $roles = Role::all();
@@ -47,6 +49,7 @@ class AdminController extends Controller
         $users = User::where('id', '!=', $currentUserId)->get();
         return view('admin.User Management.list-users', compact('users'));
     }
+    //!/* Statut Management */
     public function listStatuts()
     {
         $statuts = Statut::all();
@@ -80,6 +83,7 @@ class AdminController extends Controller
         $statut -> delete();
         return redirect()->back()->with("warning", "Le statut a été supprimé");
     }
+    //!/* Priorite Management */
     public function listPriorites()
     {
         $priorites = Priorite::all();
@@ -112,5 +116,39 @@ class AdminController extends Controller
         $priorite = Priorite::where('id', $id);
         $priorite -> delete();
         return redirect()->back()->with("warning", "Le priorite a été supprimé");
+    }
+    //!/* Category Management */
+    public function listCategories()
+    {
+        $categories = Categorie::all();
+        return view('admin.Category Management.list-categories', compact('categories'));
+    }
+    public function storeCategorie(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nom' => 'required|string',
+        ]);
+        Categorie::create(['nom' => $validatedData["nom"]]);
+        return redirect()->route('list-categories')->with("success", "Le categorie a été ajouté avec succès");
+    }
+    public function editCategorie($id)
+    {
+        $categorie = Categorie::where('id', $id)->first();
+        return view('admin.Category Management.edit-categorie', compact('categorie'));
+    }
+    public function updateCategorie(Request $request, $id)
+    {
+        $categorie = Categorie::where('id', $id);
+        $validatedData = $request->validate([
+            'nom'=>'required|string'
+        ]);
+        $categorie->update(['nom' => $validatedData['nom']]);
+        return redirect()->route('list-categories')->with("success", "Le categorie a été modifié avec succès");
+    }
+    public function deleteCategorie($id)
+    {
+        $categorie = Categorie::where('id', $id);
+        $categorie -> delete();
+        return redirect()->back()->with("warning", "Le categorie a été supprimé");
     }
 }
