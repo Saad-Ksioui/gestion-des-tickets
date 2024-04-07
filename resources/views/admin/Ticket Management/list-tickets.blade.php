@@ -1,7 +1,7 @@
 @php
   $statutColor = [
       'Open' => ['bg-[#4DBD75]', 'text-[#256B3D]'],
-      'In Progress' => ['bg-[#20A8D8]', 'text-[#0F4C75]',],
+      'In Progress' => ['bg-[#20A8D8]', 'text-[#0F4C75]'],
       'Closed' => ['bg-[#F86C6B]', 'text-[#92231A]'],
       'Issued' => ['bg-[#F8991D]', 'text-[#5E4B15]'],
   ];
@@ -74,12 +74,12 @@
             @foreach ($tickets as $ticket)
               <tr>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  <a href="{{ route('show-ticket', ['id'=>$ticket->id]) }}" class="hover:underline">
+                  <a href="{{ route('show-ticket', ['id' => $ticket->id]) }}" class="hover:underline">
                     {{ Str::limit($ticket->sujet, 15) }}
                   </a>
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  <a href="{{ route('show-ticket', ['id'=>$ticket->id]) }}" class="hover:underline">
+                  <a href="{{ route('show-ticket', ['id' => $ticket->id]) }}" class="hover:underline">
                     {{ Str::limit($ticket->description, 20) }}
                   </a>
                 </td>
@@ -128,6 +128,9 @@
             @endforeach
           </tbody>
         </table>
+        <div>
+          {{ $tickets->links() }}
+        </div>
       </div>
     </div>
   </div>

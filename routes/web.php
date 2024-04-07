@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/ticket/{id}', [AdminController::class, 'showTicket'])->name('show-ticket');
 
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
+    Route::put('/update-profile', [ProfileController::class, 'updateInfo'])->name('updateInfo');
+    Route::put('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
 });
 
 Route::get('/', function(){

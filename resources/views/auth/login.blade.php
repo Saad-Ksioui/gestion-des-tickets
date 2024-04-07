@@ -31,9 +31,6 @@
   @endif
   <div class="flex justify-center items-center h-screen">
     <div class="w-2/4">
-      @if (session()->has('success'))
-        <div class="absolute top-4 right-4">{{ session('success') }}</div>
-      @endif
       <section class="flex flex-col items-center pt-6">
         <div class="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">

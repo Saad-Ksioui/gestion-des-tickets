@@ -47,7 +47,7 @@ class AdminController extends Controller
     public function listUsers()
     {
         $currentUserId = Auth::id();
-        $users = User::where('id', '!=', $currentUserId)->get();
+        $users = User::where('id', '!=', $currentUserId)->paginate(5);
         return view('admin.User Management.list-users', compact('users'));
     }
     //!/* Statut Management */
@@ -155,7 +155,7 @@ class AdminController extends Controller
     //!/* Ticket Management */
     public function listTickets()
     {
-        $tickets = Ticket::all();
+        $tickets = Ticket::paginate(5);
         return view('admin.Ticket Management.list-tickets', compact('tickets'));
     }
     public function showTicket($id)
