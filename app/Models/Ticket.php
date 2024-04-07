@@ -56,6 +56,13 @@ class Ticket extends Model
     {
         return User::find($this->user_id)->nom_complet;
     }
+    public function getAssignedTo()
+    {
+        $user = User::find($this->assigned_to);
+        if ($user != null) {
+            return $user->nom_complet;
+        }
+    }
     public function getUserEmail()
     {
         return User::find($this->user_id)->email;

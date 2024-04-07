@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commentaire;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Statut;
@@ -150,5 +151,17 @@ class AdminController extends Controller
         $categorie = Categorie::where('id', $id);
         $categorie -> delete();
         return redirect()->back()->with("warning", "Le categorie a été supprimé");
+    }
+    //!/* Ticket Management */
+    public function listTickets()
+    {
+        $tickets = Ticket::all();
+        return view('admin.Ticket Management.list-tickets', compact('tickets'));
+    }
+    public function showTicket($id)
+    {
+        $ticket = Ticket::where('id', $id)->first();
+        $commentaires = Commentaire::where('ticket_id', $id)->get();
+        return view('admin.Ticket Management.ticket', compact('ticket', 'commentaires'));
     }
 }

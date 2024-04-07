@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-categorie/{id}', [AdminController::class, 'editCategorie'])->name('edit-categorie');
     Route::put('/update-categorie/{id}', [AdminController::class, 'updateCategorie'])->name('update-categorie');
     Route::delete('/delete-categorie/{id}', [AdminController::class, 'deleteCategorie'])->name('delete-categorie');
+
+    Route::get('/list-tickets', [AdminController::class, 'listTickets'])->name('list-tickets');
+    Route::get('/ticket/{id}', [AdminController::class, 'showTicket'])->name('show-ticket');
 });
 
 Route::get('/', function(){
@@ -38,3 +41,4 @@ Route::get('/', function(){
 });
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/authenticate', [AuthController::class, 'login'])->name('authenticate');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

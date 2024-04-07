@@ -28,7 +28,7 @@
                 <label for="nom" class="block mb-2 text-sm font-medium text-gray-900">Nom Complet</label>
                 <input type="text" name="nom_complet" id="nom_complet"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
-                  placeholder="Hamid Alami" />
+                  placeholder="Example" />
               </div>
               <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>

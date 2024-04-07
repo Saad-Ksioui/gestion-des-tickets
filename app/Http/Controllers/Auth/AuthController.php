@@ -46,5 +46,15 @@ class AuthController extends Controller
             'email' => "Les informations d'identification fournies ne correspondent pas à nos dossiers.",
         ])->onlyInput('email');
     }
+    public function logout()
+    {
+        Auth::logout();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
+
+        return redirect('/login')->with("success", "Vous êtes déconnecté.");
+    }
 }
 

@@ -24,6 +24,18 @@
     li:hover i:first-child {
       color: #20A8D8
     }
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: rgb(243, 244, 246);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
   </style>
 </head>
 
@@ -93,11 +105,11 @@
               </span>
 
             </li>
-            <li class="cursor-pointer block px-7 py-3.5
-              {{ request()->route()->getName() === 'list-categories' ||
-              request()->route()->getName() === 'edit-categorie'
-                ? 'bg-white text-black'
-                : 'hover:bg-[#3A4248] hover:text-white' }}">
+            <li
+              class="cursor-pointer block px-7 py-3.5
+              {{ request()->route()->getName() === 'list-categories' || request()->route()->getName() === 'edit-categorie'
+                  ? 'bg-white text-black'
+                  : 'hover:bg-[#3A4248] hover:text-white' }}">
 
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-tags"></i>
@@ -106,10 +118,14 @@
                 </a>
               </span>
             </li>
-            <li class="cursor-pointer block px-7 py-3.5 hover:bg-[#3A4248] hover:text-white">
+            <li
+              class="cursor-pointer block px-7 py-3.5
+            {{ request()->route()->getName() === 'list-tickets' || request()->route()->getName() === 'edit-ticket' || request()->route()->getName() === 'show-ticket'
+                ? 'bg-white text-black'
+                : 'hover:bg-[#3A4248] hover:text-white' }}">
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-circle-question"></i>
-                <a href="#" class="block">
+                <a href="{{ route('list-tickets') }}" class="block">
                   Tickets
                 </a>
               </span>
@@ -128,7 +144,7 @@
           <li class="cursor-pointer block px-7 py-3.5 hover:bg-[#3A4248] hover:text-white">
             <span class="flex items-center gap-2">
               <i class="fa-solid fa-right-from-bracket"></i>
-              <a href="#" class="block">
+              <a href="{{ route('logout') }}" class="block">
                 Log out
               </a>
             </span>
