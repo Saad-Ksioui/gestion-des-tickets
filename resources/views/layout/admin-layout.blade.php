@@ -133,10 +133,13 @@
           </ul>
         </div>
         <ul class="text-lg font-medium">
-          <li class="cursor-pointer block px-7 py-3.5 hover:bg-[#3A4248] hover:text-white">
+          <li class="cursor-pointer block px-7 py-3.5
+          {{ request()->route()->getName() === 'profile'
+            ? 'bg-white text-black'
+            : 'hover:bg-[#3A4248] hover:text-white' }}">
             <span class="flex items-center gap-2">
               <i class="fa-solid fa-user"></i>
-              <a href="#" class="block">
+              <a href="{{ route('profile') }}" class="block">
                 Profile
               </a>
             </span>

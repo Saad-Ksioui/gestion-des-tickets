@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/list-tickets', [AdminController::class, 'listTickets'])->name('list-tickets');
     Route::get('/ticket/{id}', [AdminController::class, 'showTicket'])->name('show-ticket');
+
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
 });
 
 Route::get('/', function(){

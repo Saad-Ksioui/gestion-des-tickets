@@ -32,13 +32,13 @@
           <tbody>
             @foreach ($users as $user)
               <tr>
-                <td class="px-6 py-3 text-left text-base font-medium border border-gray-400 tracking-wider">
+                <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   {{ $user->id }}</td>
-                <td class="px-6 py-3 text-left text-base font-medium border border-gray-400 tracking-wider">
+                <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   {{ $user->nom_complet }}</td>
-                <td class="px-6 py-3 text-left text-base font-medium border border-gray-400 tracking-wider">
+                <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   {{ $user->email }}</td>
-                <td class="px-6 py-3 text-left text-base font-medium border border-gray-400 tracking-wider">
+                <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   {{ $user->getRole('role_id') }}</td>
                 <td class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-2 text-center">
                   <a href="#" class="text-white text-base font-medium bg-[#4280b7] rounded-lg">View</a>
