@@ -6,11 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  
+
   @vite('resources/css/app.css')
   @vite(['resources/js/app.js'])
   <title>Gestion des tickets</title>
   <style>
+    @import url(https://fonts.googleapis.com/css2?family=Rubik:wght@100;200;300;400;500;600;800;900&display=swap);
+
+    body {
+      font-family: 'Rubik', sans-serif;
+    }
     body,
     html {
       padding: 0;
@@ -19,6 +24,7 @@
       width: 100%;
       height: 100%;
     }
+
 
     li:hover i:first-child {
       color: #20A8D8
@@ -43,7 +49,7 @@
     <div class="w-[20%] border-r-2 flex bg-[#2F353A] text-white">
       <div class="sidebar mt-5 flex flex-col justify-between my-6 w-full text-[#C8CACB]">
         <div class="menuItems flex-1">
-          <h2 class="text-5xl text-center font-semibold font-serif mb-10 text-white">Menu</h2>
+          <h2 class="text-4xl text-center font-semibold mb-10 text-white">Gesticket</h2>
           <ul class="flex flex-col text-lg font-medium">
             <li
               class="cursor-pointer block px-7 py-3.5 {{ request()->route()->getName() === 'admin-dashboard' ? 'bg-white text-black' : 'hover:bg-[#3A4248] hover:text-white' }}">

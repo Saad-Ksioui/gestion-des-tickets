@@ -67,4 +67,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+/* Create Comment */
+document.addEventListener("DOMContentLoaded", function() {
+  let openCreateCommentModalBtn = document.getElementById(
+    "openCreateCommentModalBtn"
+  );
+  let createCommentModal = document.getElementById("createCommentModal");
+  let closeBtn = createCommentModal.querySelector(".close");
+
+  function openCreateCommentModal() {
+    createCommentModal.style.display = "block";
+  }
+
+  function closeCreateCommentModal() {
+    createCommentModal.style.display = "none";
+  }
+  openCreateCommentModalBtn.addEventListener("click", openCreateCommentModal);
+  closeBtn.addEventListener("click", closeCreateCommentModal);
+  window.addEventListener("click", function(event) {
+    if (event.target == createCommentModal) {
+      closeCreateCommentModal();
+    }
+  });
+});
 

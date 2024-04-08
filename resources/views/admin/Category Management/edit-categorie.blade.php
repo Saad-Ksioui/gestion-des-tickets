@@ -13,7 +13,7 @@
   <div class="edit-categorie">
     <div class="content pt-6 w-[95%] mx-auto my-5 flex flex-col gap-11">
       <div class="edit-categorie w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
-        <h1 class="text-2xl font-medium ">Edit Categorie</h1>
+        <h1 class="text-2xl font-medium">Edit Categorie</h1>
         <form id="editStatusForm" action="{{ route('update-categorie', ['id'=>$categorie->id]) }}" method="POST">
           @csrf
           @method('put')
@@ -23,7 +23,7 @@
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5">
           </div>
           <button type="submit"
-            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Créer</button>
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Save</button>
         </form>
       </div>
     </div>

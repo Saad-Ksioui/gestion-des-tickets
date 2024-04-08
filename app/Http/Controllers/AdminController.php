@@ -164,4 +164,23 @@ class AdminController extends Controller
         $commentaires = Commentaire::where('ticket_id', $id)->get();
         return view('admin.Ticket Management.ticket', compact('ticket', 'commentaires'));
     }
+    //!/* Comment Management */
+    public function storeComment(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'commentaire'=>'required|string',
+        ]);
+        Commentaire::create([
+            'commentaire' => $validatedData["commentaire"],
+            'user_id' => auth()->id(),
+            'ticket_id' => $id
+        ]);
+        return back()->with('success', 'The comment has been added');
+    }
+    public function deleteComment($id)
+    {
+        $commentaire = Commentaire::where('id', $id)->first();
+        $commentaire->delete();
+        return back()->with('warning', 'The comment has been deleted');
+    }
 }
