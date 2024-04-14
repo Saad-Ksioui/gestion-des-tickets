@@ -35,7 +35,7 @@ class AuthController extends Controller
                     case 2:
                         return redirect('/technicien-dashboard');
                     case 3:
-                        return redirect('/employee-dashboard');
+                        return redirect('/employe-dashboard');
                     default:
                         break;
                 }

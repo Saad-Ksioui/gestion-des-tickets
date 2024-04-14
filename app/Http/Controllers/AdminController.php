@@ -73,7 +73,7 @@ class AdminController extends Controller
     {
         $statut = Statut::where('id', $id);
         $validatedData = $request->validate([
-            'nom'=>'required|string'
+            'nom' => 'required|string'
         ]);
         $statut->update(['nom' => $validatedData['nom']]);
         return redirect()->route('list-statuts')->with("success", "Le statut a été modifié avec succès");
@@ -81,7 +81,7 @@ class AdminController extends Controller
     public function deleteStatut($id)
     {
         $statut = Statut::where('id', $id);
-        $statut -> delete();
+        $statut->delete();
         return redirect()->back()->with("warning", "Le statut a été supprimé");
     }
     //!/* Priorite Management */
@@ -107,7 +107,7 @@ class AdminController extends Controller
     {
         $priorite = Priorite::where('id', $id);
         $validatedData = $request->validate([
-            'nom'=>'required|string'
+            'nom' => 'required|string'
         ]);
         $priorite->update(['nom' => $validatedData['nom']]);
         return redirect()->route('list-priorites')->with("success", "Le priorite a été modifié avec succès");
@@ -115,7 +115,7 @@ class AdminController extends Controller
     public function deletePriorite($id)
     {
         $priorite = Priorite::where('id', $id);
-        $priorite -> delete();
+        $priorite->delete();
         return redirect()->back()->with("warning", "Le priorite a été supprimé");
     }
     //!/* Category Management */
@@ -141,7 +141,7 @@ class AdminController extends Controller
     {
         $categorie = Categorie::where('id', $id);
         $validatedData = $request->validate([
-            'nom'=>'required|string'
+            'nom' => 'required|string'
         ]);
         $categorie->update(['nom' => $validatedData['nom']]);
         return redirect()->route('list-categories')->with("success", "Le categorie a été modifié avec succès");
@@ -149,7 +149,7 @@ class AdminController extends Controller
     public function deleteCategorie($id)
     {
         $categorie = Categorie::where('id', $id);
-        $categorie -> delete();
+        $categorie->delete();
         return redirect()->back()->with("warning", "Le categorie a été supprimé");
     }
     //!/* Ticket Management */
@@ -164,23 +164,46 @@ class AdminController extends Controller
         $commentaires = Commentaire::where('ticket_id', $id)->get();
         return view('admin.Ticket Management.ticket', compact('ticket', 'commentaires'));
     }
+    public function editTicket($id)
+    {
+        $ticket = Ticket::where('id', $id)->first();
+        $statuts = Statut::all();
+        $priorites = Priorite::all();
+        $categories = Categorie::all();
+        $users = User::where('role_id', 2)->get();
+        return view('admin.Ticket Management.edit-ticket', compact('ticket', 'statuts', 'priorites', 'categories', 'users'));
+    }
+    public function updateTicket(Request $request, $id)
+    {
+        $ticket = Ticket::where('id', $id);
+        $validatedData = $request->validate([
+            'sujet' => 'required|string',
+            'description' => 'required|string',
+            'priorite_id' => 'required',
+            'statut_id' => 'required',
+            'categorie_id' => 'required',
+            'assigned_to' => 'required',
+        ]);
+        $ticket->update($validatedData);
+        return redirect()->route('list-tickets')->with("success", "Le ticket a été modifié avec succès");
+    }
     //!/* Comment Management */
     public function storeComment(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'commentaire'=>'required|string',
+            'commentaire' => 'required|string',
         ]);
         Commentaire::create([
             'commentaire' => $validatedData["commentaire"],
             'user_id' => auth()->id(),
             'ticket_id' => $id
         ]);
-        return back()->with('success', 'The comment has been added');
+        return back()->with('success', 'Le commentaire a été ajouté');
     }
     public function deleteComment($id)
     {
         $commentaire = Commentaire::where('id', $id)->first();
         $commentaire->delete();
-        return back()->with('warning', 'The comment has been deleted');
+        return back()->with('warning', 'Le commentaire a été supprimé');
     }
 }
