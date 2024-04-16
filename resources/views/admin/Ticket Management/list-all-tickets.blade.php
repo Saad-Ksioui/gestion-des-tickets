@@ -34,7 +34,7 @@
             <tr>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Subject
+                Sujet
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
@@ -42,31 +42,31 @@
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Status
+                Statut
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Priority
+                Priorité
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Category
+                Catégorie
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Employee Name
+                Nom de l'employé
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Employee Email
+                Email de l'employé
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Assigned To
+                Attribué à
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Operation
+                Opération
               </th>
             </tr>
           </thead>

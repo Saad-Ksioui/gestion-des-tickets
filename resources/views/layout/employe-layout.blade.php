@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   @vite('resources/css/app.css')
   @vite(['resources/js/app.js'])
   <title>Gestion des tickets</title>
@@ -65,14 +66,14 @@
             </li>
             <li
               class="cursor-pointer block px-7 py-3.5
-            {{ request()->route()->getName() === 'list-tickets' ||
+            {{ request()->route()->getName() === 'employe-list-tickets' ||
             request()->route()->getName() === 'edit-ticket' ||
             request()->route()->getName() === 'show-ticket'
                 ? 'bg-white text-black'
                 : 'hover:bg-[#3A4248] hover:text-white' }}">
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-circle-question"></i>
-                <a href="{{ route('list-tickets') }}" class="block">
+                <a href="{{ route('employe-list-tickets') }}" class="block">
                   Tickets
                 </a>
               </span>
@@ -106,6 +107,22 @@
       @yield('content')
     </div>
   </div>
+  <script>
+    const notifBtn = document.getElementById('notifBtn')
+    const notifications = document.getElementById('notifications')
+
+    notifBtn.addEventListener('click', function(event) {
+      if (notifications.classList.contains('hidden')) {
+        notifications.classList.remove('hidden');
+        notifications.classList.add('block');
+      } else {
+        notifications.classList.remove('block');
+        notifications.classList.add('hidden');
+      }
+    });
+
+    
+  </script>
 </body>
 
 </html>

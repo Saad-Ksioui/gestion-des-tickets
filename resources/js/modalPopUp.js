@@ -90,4 +90,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+/* Creer Ticket */
+document.addEventListener("DOMContentLoaded", function() {
+  let openCreerTicketModalBtn = document.getElementById(
+    "openCreerTicketModalBtn"
+  );
+  let creerTicketModal = document.getElementById("creerTicketModal");
+  let closeBtn = creerTicketModal.querySelector(".close");
+
+  function openCreerTicketModal() {
+    creerTicketModal.style.display = "block";
+  }
+
+  function closeCreerTicketModal() {
+    creerTicketModal.style.display = "none";
+  }
+  openCreerTicketModalBtn.addEventListener("click", openCreerTicketModal);
+  closeBtn.addEventListener("click", closeCreerTicketModal);
+  window.addEventListener("click", function(event) {
+    if (event.target == creerTicketModal) {
+      closeCreerTicketModal();
+    }
+  });
+});
 

@@ -16,6 +16,7 @@
     body {
       font-family: 'Rubik', sans-serif;
     }
+
     body,
     html {
       padding: 0;
@@ -29,15 +30,19 @@
     li:hover i:first-child {
       color: #20A8D8
     }
+
     ::-webkit-scrollbar {
       width: 10px;
     }
+
     ::-webkit-scrollbar-track {
       background-color: rgb(243, 244, 246);
     }
+
     ::-webkit-scrollbar-thumb {
       background: #888;
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: #555;
     }
@@ -56,7 +61,7 @@
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-house"></i>
                 <a href="{{ route('admin-dashboard') }}">
-                  Dashboard
+                  Tableau de bord
                 </a>
               </span>
             </li>
@@ -68,17 +73,23 @@
 
               <span id="userManagementDropdown" class="flex items-center gap-2 ">
                 <i class="fa-solid fa-users"></i>
-                <span href="#" class="block">User Management</span>
+                <span href="#" class="block">
+                  Utilisateurs
+                </span>
                 <i class="fa-solid fa-chevron-down" id="userManagementChevronDown"></i>
               </span>
 
               <ul id="userManagementDropdownContent"
                 class="dropdownLinks hidden absolute top-full right-0 bg-white text-black w-full shadow-md">
                 <li>
-                  <a href="{{ route('list-users') }}" class="block px-4 py-2 hover:bg-gray-100">List Users</a>
+                  <a href="{{ route('list-users') }}" class="block px-4 py-2 hover:bg-gray-100">
+                    Liste des utilisateurs
+                  </a>
                 </li>
                 <li>
-                  <a href="{{ route('create-user') }}" class="block px-4 py-2 hover:bg-gray-100">Create a user</a>
+                  <a href="{{ route('create-user') }}" class="block px-4 py-2 hover:bg-gray-100">
+                    Créer un utilisateur
+                  </a>
                 </li>
               </ul>
             </li>
@@ -91,7 +102,7 @@
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-gears"></i>
                 <a href="{{ route('list-statuts') }}" class="block">
-                  Status
+                  Statuts
                 </a>
               </span>
 
@@ -105,7 +116,7 @@
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-gears"></i>
                 <a href="{{ route('list-priorites') }}" class="block">
-                  Priorities
+                  Priorités
                 </a>
               </span>
 
@@ -119,13 +130,15 @@
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-tags"></i>
                 <a href="{{ route('list-categories') }}" class="block">
-                  Categories
+                  Catégories
                 </a>
               </span>
             </li>
             <li
               class="cursor-pointer block px-7 py-3.5
-            {{ request()->route()->getName() === 'list-tickets' || request()->route()->getName() === 'edit-ticket' || request()->route()->getName() === 'show-ticket'
+            {{ request()->route()->getName() === 'list-tickets' ||
+            request()->route()->getName() === 'edit-ticket' ||
+            request()->route()->getName() === 'show-ticket'
                 ? 'bg-white text-black'
                 : 'hover:bg-[#3A4248] hover:text-white' }}">
               <span class="flex items-center gap-2">
@@ -138,10 +151,9 @@
           </ul>
         </div>
         <ul class="text-lg font-medium">
-          <li class="cursor-pointer block px-7 py-3.5
-          {{ request()->route()->getName() === 'profile'
-            ? 'bg-white text-black'
-            : 'hover:bg-[#3A4248] hover:text-white' }}">
+          <li
+            class="cursor-pointer block px-7 py-3.5
+          {{ request()->route()->getName() === 'profile' ? 'bg-white text-black' : 'hover:bg-[#3A4248] hover:text-white' }}">
             <span class="flex items-center gap-2">
               <i class="fa-solid fa-user"></i>
               <a href="{{ route('profile') }}" class="block">
@@ -153,7 +165,7 @@
             <span class="flex items-center gap-2">
               <i class="fa-solid fa-right-from-bracket"></i>
               <a href="{{ route('logout') }}" class="block">
-                Log out
+                Se déconnecter
               </a>
             </span>
           </li>
@@ -185,9 +197,6 @@
       });
     });
 
-    setTimeout(() => {
-      document.getElementById('Alert').style.display = 'none';
-    }, 2000);
   </script>
 
 </body>

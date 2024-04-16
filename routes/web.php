@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/delete-categorie/{id}', [AdminController::class, 'deleteCategorie'])->name('delete-categorie');
 
         //? Ticket Management
-        Route::get('/list-tickets', [AdminController::class, 'listTickets'])->name('list-tickets');
+        Route::get('/list-tickets', [AdminController::class, 'listTickets'])->name('list-all-tickets');
         Route::get('/ticket/{id}', [AdminController::class, 'showTicket'])->name('show-ticket');
         Route::get('/edit-ticket/{id}', [AdminController::class, 'editTicket'])->name('edit-ticket');
         Route::put('/update-ticket/{id}', [AdminController::class, 'updateTicket'])->name('update-ticket');
@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
     //! Employé
     Route::middleware('employe')->group(function () {
         Route::get('/employe-dashboard', [EmployeController::class, 'dashboard'])->name('employe-dashboard');
+        Route::get('/list-tickets', [EmployeController::class, 'listTickets'])->name('employe-list-tickets');
+        Route::post('/store-ticket', [EmployeController::class, 'storeTicket'])->name('store-ticket');
     });
 
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');

@@ -18,7 +18,9 @@
   <div class="main">
     <div class="content pt-6 w-[95%] mx-auto my-5 flex flex-col gap-11">
       <div class="dashboard w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
-        <h1 class="text-2xl font-medium ">Dashboard</h1>
+        <h1 class="text-2xl font-medium ">
+          Tableau de bord
+        </h1>
         <div class="cards grid grid-cols-4 gap-4">
 
           <div class="card bg-[#4DBD75] p-7 border border-[#389457] rounded-lg">
@@ -56,13 +58,13 @@
         </div>
       </div>
       <div class="recent-tickets w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
-        <h1 class="text-2xl font-medium">Recent Tickets</h1>
+        <h1 class="text-2xl font-medium">Tickets Récents</h1>
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Subject
+                Sujet
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
@@ -70,27 +72,27 @@
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Status
+                Statut
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Priority
+                Priorité
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Category
+                Catégorie
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Employee Name
+                Nom de l'employé
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Employee Email
+                Email de l'employé
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Assigned To
+                Attribué à
               </th>
             </tr>
           </thead>
@@ -147,7 +149,8 @@
           </tbody>
         </table>
         <div class="flex justify-end mt-2">
-          <a href="{{ route('list-tickets') }}" class="py-2 px-4 bg-black text-white font-medium rounded-md hover:shadow-md">Show all</a>
+          <a href="{{ route('list-all-ticket') }}" class="py-2 px-4 bg-black text-white font-medium rounded-md hover:shadow-md">
+            Afficher tout</a>
         </div>
       </div>
     </div>

@@ -16,10 +16,11 @@ class Ticket extends Model
     protected $table = 'tickets';
 
     protected $fillable = [
-        'message',
+        'sujet',
+        'description',
         'user_id',
         'priorite_id',
-        'etat_id',
+        'statut_id',
         'categorie_id',
         'assigned_to',
     ];
@@ -78,5 +79,9 @@ class Ticket extends Model
     public function getCategorie()
     {
         return Categorie::find($this->categorie_id)->nom;
+    }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

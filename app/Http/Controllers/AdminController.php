@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commentaire;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Statut;
 use App\Models\Ticket;
 use App\Models\Priorite;
 use App\Models\Categorie;
+use App\Models\Commentaire;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -156,7 +157,7 @@ class AdminController extends Controller
     public function listTickets()
     {
         $tickets = Ticket::paginate(5);
-        return view('admin.Ticket Management.list-tickets', compact('tickets'));
+        return view('admin.Ticket Management.list-all-tickets', compact('tickets'));
     }
     public function showTicket($id)
     {
@@ -173,20 +174,40 @@ class AdminController extends Controller
         $users = User::where('role_id', 2)->get();
         return view('admin.Ticket Management.edit-ticket', compact('ticket', 'statuts', 'priorites', 'categories', 'users'));
     }
+
     public function updateTicket(Request $request, $id)
     {
-        $ticket = Ticket::where('id', $id);
+        // Retrieve the ticket instance
+        $ticket = Ticket::findOrFail($id);
+
+        // Validate the incoming request data
         $validatedData = $request->validate([
             'sujet' => 'required|string',
             'description' => 'required|string',
             'priorite_id' => 'required',
             'statut_id' => 'required',
             'categorie_id' => 'required',
-            'assigned_to' => 'required',
+            'assigned_to' => 'nullable',
         ]);
+
+        // Get the original value of assigned_to
+        $originalAssignedTo = $ticket->getOriginal('assigned_to');
+
+        if ($request->has('assigned_to') && $request->assigned_to != $originalAssignedTo) {
+
+            $notification = new Notification();
+            $notification->user_id = $ticket->user_id;
+            $notification->message = 'Votre ticket a été attribué à ';
+            $notification->type = 'ticket_attribué';
+            $notification->save();
+        }
+
         $ticket->update($validatedData);
+
         return redirect()->route('list-tickets')->with("success", "Le ticket a été modifié avec succès");
     }
+
+
     //!/* Comment Management */
     public function storeComment(Request $request, $id)
     {

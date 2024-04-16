@@ -76,7 +76,7 @@
             <label for="assigned_to" class="block mb-2 text-sm font-medium text-gray-900">Assigned_to</label>
             <select name="assigned_to"
               class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5">
-              <option>Selectionner un technicien</option>
+              <option  value="">Selectionner un technicien</option>
               @foreach ($users as $user)
                 <option value="{{ $user->id }}" @if ($user->id == $ticket->assigned_to) selected @endif>
                   {{ $user->nom_complet }}</option>
