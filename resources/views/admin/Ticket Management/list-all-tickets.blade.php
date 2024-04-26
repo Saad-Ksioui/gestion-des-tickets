@@ -1,15 +1,15 @@
 @php
   $statutColor = [
-      'Open' => ['bg-[#4DBD75]', 'text-[#256B3D]'],
-      'In Progress' => ['bg-[#20A8D8]', 'text-[#0F4C75]'],
-      'Closed' => ['bg-[#F86C6B]', 'text-[#92231A]'],
-      'Issued' => ['bg-[#F8991D]', 'text-[#5E4B15]'],
+      'Créer' => ['bg-[#4DBD75]', 'text-[#256B3D]'],
+      'En Cours' => ['bg-[#20A8D8]', 'text-[#0F4C75]'],
+      'Fermé' => ['bg-[#F86C6B]', 'text-[#92231A]'],
+      'Problème' => ['bg-[#F8991D]', 'text-[#5E4B15]'],
   ];
 
   $prioriteColor = [
-      'High' => ['bg-[#F86C6B]', 'text-[#92231A]'],
-      'Medium' => ['bg-[#F8991D]', 'text-[#5E4B15]'],
-      'Low' => ['bg-[#20A8D8]', 'text-[#0F4C75]'],
+      'Haut' => ['bg-[#F86C6B]', 'text-[#92231A]'],
+      'Moyen' => ['bg-[#F8991D]', 'text-[#5E4B15]'],
+      'Faible' => ['bg-[#20A8D8]', 'text-[#0F4C75]'],
   ];
 
 @endphp
@@ -28,7 +28,17 @@
   <div class="list-tickets">
     <div class="content pt-6 w-[95%] mx-auto my-5 flex flex-col gap-11">
       <div class="list-tickets w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
-        <h1 class="text-2xl font-medium ">List Tickets</h1>
+        <div class="header flex items-center justify-between">
+          <h1 class="text-2xl font-medium ">List Tickets</h1>
+          <form action="{{ route('search-all-tickets') }}" method="GET"
+            class="flex justify-between items-center p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
+            @csrf
+            <input type="text" name="search" placeholder="Search tickets..."
+              class="bg-gray-50 outline-none text-sm ml-4" required />
+            <button type="submit"
+              class="ml-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">Search</button>
+          </form>
+        </div>
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -120,7 +130,8 @@
                 </td>
                 <td
                   class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-2 text-center">
-                  <a href="{{ route('edit-ticket', ['id'=>$ticket->id]) }}" class="text-white text-base font-medium bg-[#4DA845] rounded-lg">Edit</a>
+                  <a href="{{ route('edit-ticket', ['id' => $ticket->id]) }}"
+                    class="text-white text-base font-medium bg-[#4DA845] rounded-lg">Edit</a>
                   <a href="#" class="text-white text-base font-medium bg-[#DC3544] rounded-lg">Delete</a>
                 </td>
               </tr>

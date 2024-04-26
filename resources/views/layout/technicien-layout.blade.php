@@ -56,25 +56,25 @@
           <h2 class="text-4xl text-center font-semibold mb-10 text-white">Gesticket</h2>
           <ul class="flex flex-col text-lg font-medium">
             <li
-              class="cursor-pointer block px-7 py-3.5 {{ request()->route()->getName() === 'employe-dashboard' ? 'bg-white text-black' : 'hover:bg-[#3A4248] hover:text-white' }}">
+              class="cursor-pointer block px-7 py-3.5 {{ request()->route()->getName() === 'tech-dashboard' ? 'bg-white text-black' : 'hover:bg-[#3A4248] hover:text-white' }}">
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-house"></i>
-                <a href="{{ route('employe-dashboard') }}">
+                <a href="{{ route('tech-dashboard') }}">
                   Dashboard
                 </a>
               </span>
             </li>
             <li
               class="cursor-pointer block px-7 py-3.5
-            {{ request()->route()->getName() === 'employe-list-tickets' ||
-            request()->route()->getName() === 'edit-employe-ticket' ||
-            request()->route()->getName() === 'search-employe-tickets' ||
-            request()->route()->getName() === 'show-employe-ticket'
+            {{ request()->route()->getName() === 'tech-list-tickets' ||
+            request()->route()->getName() === 'edit-tech-ticket' ||
+            request()->route()->getName() === 'search-tech-tickets' ||
+            request()->route()->getName() === 'show-tech-ticket'
                 ? 'bg-white text-black'
                 : 'hover:bg-[#3A4248] hover:text-white' }}">
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-circle-question"></i>
-                <a href="{{ route('employe-list-tickets') }}" class="block">
+                <a href="{{ route('tech-list-tickets') }}" class="block">
                   Tickets
                 </a>
               </span>
@@ -84,10 +84,10 @@
         <ul class="text-lg font-medium">
           <li
             class="cursor-pointer block px-7 py-3.5
-          {{ request()->route()->getName() === 'employe-profile' ? 'bg-white text-black' : 'hover:bg-[#3A4248] hover:text-white' }}">
+          {{ request()->route()->getName() === 'tech-profile' ? 'bg-white text-black' : 'hover:bg-[#3A4248] hover:text-white' }}">
             <span class="flex items-center gap-2">
               <i class="fa-solid fa-user"></i>
-              <a href="{{ route('employe-profile') }}" class="block">
+              <a href="{{ route('tech-profile') }}" class="block">
                 Profile
               </a>
             </span>

@@ -30,15 +30,26 @@
       <div class="list-tickets w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
         <div class="header flex items-center justify-between">
           <h1 class="text-2xl font-medium ">List Tickets</h1>
-          <button id="openCreerTicketModalBtn" class="py-2 px-4 bg-black text-white font-medium rounded-md hover:shadow-md">Ajouter un
+          <button id="openCreerTicketModalBtn"
+            class="py-2 px-4 bg-black text-white font-medium rounded-md hover:shadow-md">Ajouter un
             ticket</button>
+        </div>
+        <div class="header flex items-center justify-end">
+          <form action="{{ route('search-employe-tickets') }}" method="GET"
+            class="flex justify-between items-center p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
+            @csrf
+            <input type="text" name="search" placeholder="Search tickets..."
+              class="bg-gray-50 outline-none text-sm ml-4" required />
+            <button type="submit"
+              class="ml-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">Search</button>
+          </form>
         </div>
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Subject
+                Sujet
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
@@ -46,23 +57,23 @@
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Status
+                Statut
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Priority
+                Priorité
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Category
+                Catégorie
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Assigned To
+                Attribué à
               </th>
               <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium border border-gray-400 uppercase tracking-wider">
-                Operation
+                Opération
               </th>
             </tr>
           </thead>
@@ -70,12 +81,12 @@
             @foreach ($tickets as $ticket)
               <tr>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  <a href="{{ route('show-ticket', ['id' => $ticket->id]) }}" class="hover:underline">
+                  <a href="{{ route('show-employe-ticket', ['id' => $ticket->id]) }}" class="hover:underline">
                     {{ Str::limit($ticket->sujet, 15) }}
                   </a>
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  <a href="{{ route('show-ticket', ['id' => $ticket->id]) }}" class="hover:underline">
+                  <a href="{{ route('show-employe-ticket', ['id' => $ticket->id]) }}" class="hover:underline">
                     {{ Str::limit($ticket->description, 20) }}
                   </a>
                 </td>
@@ -110,9 +121,15 @@
                 </td>
                 <td
                   class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-2 text-center">
-                  <a href="{{ route('edit-ticket', ['id' => $ticket->id]) }}"
+                  <a href="{{ route('edit-employe-ticket', ['id' => $ticket->id]) }}"
                     class="text-white text-base font-medium bg-[#4DA845] rounded-lg">Edit</a>
-                  <a href="#" class="text-white text-base font-medium bg-[#DC3544] rounded-lg">Delete</a>
+                  <form action="{{ route('delete-employe-ticket', ['id' => $ticket->id]) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="text-white text-base font-medium px-5 bg-[#DC3544] rounded-lg">
+                      Delete
+                    </button>
+                  </form>
                 </td>
               </tr>
             @endforeach
@@ -143,7 +160,7 @@
         <div class="mb-3">
           <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
           <input type="text" name="description" id="description"
-            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 resize-vertical"/>
+            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 resize-vertical" />
           @error('description')
             <span>{{ $message }}</span>
           @enderror

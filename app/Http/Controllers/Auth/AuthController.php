@@ -28,12 +28,11 @@ class AuthController extends Controller
 
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-
                 switch (auth()->user()->role_id) {
                     case 1:
                         return redirect('/admin-dashboard');
                     case 2:
-                        return redirect('/technicien-dashboard');
+                        return redirect('/tech-dashboard');
                     case 3:
                         return redirect('/employe-dashboard');
                     default:

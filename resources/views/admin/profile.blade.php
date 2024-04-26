@@ -71,16 +71,6 @@
           </button>
         </form>
       </div>
-      <div class="deleteAccount w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
-        <h1 class="text-xl font-medium ">Delete Account</h1>
-        <p class="text-sm">Once your account is deleted, all of your data will be deleted</p>
-        <form action="" method="POST">
-          @csrf
-          @method('delete')
-          <input type="submit" value="Delete Account"
-            class="text-white bg-red-500 hover:bg-red-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center uppercase cursor-pointer">
-        </form>
-      </div>
     </div>
   </div>
 @endsection

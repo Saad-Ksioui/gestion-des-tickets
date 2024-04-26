@@ -22,4 +22,8 @@ class Notification extends Model
     {
         return $this->belongsTo(Ticket::class);
     }
+    public function getUser()
+    {
+        return User::find($this->user_id)->nom_complet;
+    }
 }

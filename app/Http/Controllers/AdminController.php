@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TicketAttribuer;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Statut;
@@ -13,6 +14,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -154,7 +156,7 @@ class AdminController extends Controller
         return redirect()->back()->with("warning", "Le categorie a été supprimé");
     }
     //!/* Ticket Management */
-    public function listTickets()
+    public function listAllTickets()
     {
         $tickets = Ticket::paginate(5);
         return view('admin.Ticket Management.list-all-tickets', compact('tickets'));
@@ -177,10 +179,8 @@ class AdminController extends Controller
 
     public function updateTicket(Request $request, $id)
     {
-        // Retrieve the ticket instance
         $ticket = Ticket::findOrFail($id);
 
-        // Validate the incoming request data
         $validatedData = $request->validate([
             'sujet' => 'required|string',
             'description' => 'required|string',
@@ -190,21 +190,39 @@ class AdminController extends Controller
             'assigned_to' => 'nullable',
         ]);
 
-        // Get the original value of assigned_to
         $originalAssignedTo = $ticket->getOriginal('assigned_to');
 
         if ($request->has('assigned_to') && $request->assigned_to != $originalAssignedTo) {
-
             $notification = new Notification();
             $notification->user_id = $ticket->user_id;
-            $notification->message = 'Votre ticket a été attribué à ';
+            $notification->ticket_id = $ticket->id;
+            $notification->message = 'Votre ticket a été attribué';
             $notification->type = 'ticket_attribué';
             $notification->save();
+
+            $techSupport = User::findOrFail($request->assigned_to);
+            $techSupportEmail = $techSupport->email;
+            Mail::to($techSupportEmail)->send(new TicketAttribuer($ticket));
         }
 
         $ticket->update($validatedData);
 
-        return redirect()->route('list-tickets')->with("success", "Le ticket a été modifié avec succès");
+        return redirect()->route('list-all-tickets')->with("success", "Le ticket a été modifié avec succès");
+    }
+    public function deleteTicket($id)
+    {
+        $ticket = Ticket::where('id', $id)->first();
+
+        $ticket->delete();
+
+        return back()->with('warning', 'Le ticket a été supprimé');
+    }
+    public function adminSearch(Request $request)
+    {
+        $search = $request->input('search');
+        $tickets = Ticket::where('sujet', 'like', '%' . $search . '%')
+            ->paginate(5);
+        return view('admin.Ticket Management.list-all-tickets', compact('tickets'));
     }
 
 
@@ -219,6 +237,13 @@ class AdminController extends Controller
             'user_id' => auth()->id(),
             'ticket_id' => $id
         ]);
+        $notification = new Notification();
+        $notification->user_id = auth()->id();
+        $notification->ticket_id = $id;
+        $notification->message = 'Votre ticket a été commenter';
+        $notification->type = 'ticket_comment';
+        $notification->save();
+
         return back()->with('success', 'Le commentaire a été ajouté');
     }
     public function deleteComment($id)
@@ -226,5 +251,42 @@ class AdminController extends Controller
         $commentaire = Commentaire::where('id', $id)->first();
         $commentaire->delete();
         return back()->with('warning', 'Le commentaire a été supprimé');
+    }
+
+    //! Profile Management
+    public function profile()
+    {
+        $currentUser = auth()->user();
+        return view('admin.profile', compact('currentUser'));
+    }
+    public function updateInfo(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nom_complet' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . auth()->id(),
+        ]);
+        $user = Auth::user();
+        $user->nom_complet = $validatedData['nom_complet'];
+        $user->email = $validatedData['email'];
+        $user->save();
+        return redirect()->route('profile')->with('success', 'Your profile info has been updated');
+    }
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Le mot de passe actuel est incorrect.']);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->route('profile')->with('success', 'Your password has been updated');
     }
 }

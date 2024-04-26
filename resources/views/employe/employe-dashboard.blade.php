@@ -15,6 +15,11 @@
 @endphp
 @extends('layout.employe-layout')
 @section('content')
+  @if (session()->has('warning'))
+    <div id="Alert" class="py-4 px-4 text-lg font-semibold text-white bg-red-600 absolute right-1 top-1 m-2">
+      {{ session('warning') }}
+    </div>
+  @endif
   <div class="main">
     <div class="content pt-6 w-[95%] mx-auto my-5 flex flex-col gap-11">
       <div class="dashboard w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
@@ -35,21 +40,37 @@
             <div id="notifications"
               class='absolute right-0 shadow-lg bg-white py-2 z-[1000] min-w-full rounded-lg w-[410px] max-h-[500px] overflow-auto hidden'>
               <div class="flex items-center justify-between my-4 px-4">
-                <p class="text-xs text-gray-500 cursor-pointer">Clear all</p>
-                <p class="text-xs text-gray-500 cursor-pointer">Mark as read</p>
+                <form action="{{ route('employe-tout-effacer') }}" method="post">
+                  @csrf
+                  @method('delete')
+                  <input type="submit" class="text-xs text-gray-500 cursor-pointer" value="Tout effacer" />
+                </form>
+
+                <form action="{{ route('employe-markAllAsRead') }}" method="post">
+                  @csrf
+                  <input type="submit" class="text-xs text-gray-500 cursor-pointer" value="Tout marquer comme lu" />
+                </form>
               </div>
               <ul class="divide-y">
                 @foreach ($notifications as $notification)
-                  <li class='py-4 px-4 flex items-center justify-between hover:bg-gray-50 text-black text-sm cursor-pointer @if (!$notification->markAsRead) bg-gray-100 @endif'>
-                    <div class="notif flex gap-3 items-center">
-                      <div class="notRead size-3 rounded-full bg-green-500">
+                  <li
+                    class='py-4 px-4 hover:bg-gray-50 text-black text-sm cursor-pointer @if (!$notification->markAsRead) bg-gray-100 @endif'>
+                    <a href="{{ route('show-employe-ticket', ['id' => $notification->ticket_id]) }}"
+                      class=" flex items-center justify-between">
+                      <div class="notif flex gap-3 items-center">
+                        <div
+                          class="notRead size-3 rounded-full @if ($notification->markAsRead) bg-green-500 @else bg-red-500 @endif">
+                        </div>
+                        <div class="ml-6">
+                          <h3 class="text-sm text-[#333] font-semibold">{{ $notification->message }}</h3>
+                          <p class="text-xs text-gray-500 leading-3 mt-2">{{ $notification->created_at }}</p>
+                        </div>
                       </div>
-                      <div class="ml-6">
-                        <h3 class="text-sm text-[#333] font-semibold">{{ $notification->message }}</h3>
-                        <p class="text-xs text-gray-500 leading-3 mt-2">{{ $notification->created_at }}</p>
-                      </div>
-                    </div>
-                    <p class="text-xs text-gray-500 cursor-pointer">Mark as read</p>
+                      <form action="{{ route('employe-markAsRead', ['id' => $notification->id]) }}" method="post">
+                        @csrf
+                        <input type="submit" class="text-xs text-gray-500 cursor-pointer" value="Marquer comme lu" />
+                      </form>
+                    </a>
                   </li>
                 @endforeach
               </ul>
@@ -57,7 +78,7 @@
           </div>
 
         </div>
-        <!-- dashboard content -->
+
         <div class="cards grid grid-cols-4 gap-4">
           <div class="card bg-[#4DBD75] p-7 border border-[#389457] rounded-lg">
             <div class="number text-xl text-white font-medium">
@@ -129,46 +150,46 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($tickets->take(2) as $ticket)
+            @foreach ($lastTickets->take(2) as $lastTicket)
               <tr>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  <a href="{{ route('show-ticket', ['id' => $ticket->id]) }}" class="hover:underline">
-                    {{ Str::limit($ticket->sujet, 15) }}
+                  <a href="{{ route('show-employe-ticket', ['id' => $lastTicket->id]) }}" class="hover:underline">
+                    {{ Str::limit($lastTicket->sujet, 15) }}
                   </a>
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  <a href="{{ route('show-ticket', ['id' => $ticket->id]) }}" class="hover:underline">
-                    {{ Str::limit($ticket->description, 20) }}
+                  <a href="{{ route('show-employe-ticket', ['id' => $lastTicket->id]) }}" class="hover:underline">
+                    {{ Str::limit($lastTicket->description, 20) }}
                   </a>
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   <span></span><span
-                    class="{{ isset($statutColor[$ticket->getStatut('status_id')])
-                        ? $statutColor[$ticket->getStatut('status_id')][0] .
+                    class="{{ isset($statutColor[$lastTicket->getStatut('status_id')])
+                        ? $statutColor[$lastTicket->getStatut('status_id')][0] .
                             ' ' .
-                            $statutColor[$ticket->getStatut('status_id')][1] .
+                            $statutColor[$lastTicket->getStatut('status_id')][1] .
                             ' rounded-lg px-2 py-1 font-semibold text-nowrap'
                         : '' }}">
-                    {{ $ticket->getStatut('status_id') }}
+                    {{ $lastTicket->getStatut('status_id') }}
                   </span>
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
                   <span
-                    class="{{ isset($prioriteColor[$ticket->getPriorite('priorite_id')])
-                        ? $prioriteColor[$ticket->getPriorite('priorite_id')][0] .
+                    class="{{ isset($prioriteColor[$lastTicket->getPriorite('priorite_id')])
+                        ? $prioriteColor[$lastTicket->getPriorite('priorite_id')][0] .
                             ' ' .
-                            $prioriteColor[$ticket->getPriorite('priorite_id')][1] .
+                            $prioriteColor[$lastTicket->getPriorite('priorite_id')][1] .
                             ' rounded-lg px-2 py-1 font-semibold'
                         : '' }}">
-                    {{ $ticket->getPriorite('priorite_id') }}
+                    {{ $lastTicket->getPriorite('priorite_id') }}
                   </span>
 
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  {{ $ticket->getCategorie('categorie_id') }}
+                  {{ $lastTicket->getCategorie('categorie_id') }}
                 </td>
                 <td class="px-6 py-3 text-left text-xs font-medium border border-gray-400 tracking-wider">
-                  {{ $ticket->getAssignedTo('assigned_to') }}
+                  {{ $lastTicket->getAssignedTo('assigned_to') }}
                 </td>
               </tr>
             @endforeach

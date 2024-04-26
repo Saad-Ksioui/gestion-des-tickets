@@ -136,14 +136,15 @@
             </li>
             <li
               class="cursor-pointer block px-7 py-3.5
-            {{ request()->route()->getName() === 'list-tickets' ||
+            {{ request()->route()->getName() === 'list-all-tickets' ||
+            request()->route()->getName() === 'search-all-tickets' ||
             request()->route()->getName() === 'edit-ticket' ||
             request()->route()->getName() === 'show-ticket'
                 ? 'bg-white text-black'
                 : 'hover:bg-[#3A4248] hover:text-white' }}">
               <span class="flex items-center gap-2">
                 <i class="fa-solid fa-circle-question"></i>
-                <a href="{{ route('list-tickets') }}" class="block">
+                <a href="{{ route('list-all-tickets') }}" class="block">
                   Tickets
                 </a>
               </span>
