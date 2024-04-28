@@ -17,8 +17,8 @@
   <div class="main">
     <div class="content pt-6 w-[95%] mx-auto my-5 flex flex-col gap-11">
       <div class="profileInfo w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
-        <h1 class="text-xl font-medium">Profile Information</h1>
-        <p class="text-sm">Update your account's profile information and email adresse</p>
+        <h1 class="text-xl font-medium">Informations sur le profil</h1>
+        <p class="text-sm">Mettez à jour les informations de profil et l'adresse e-mail de votre compte</p>
         <form action="{{ route('updateInfo') }}" method="POST">
           @csrf
           @method('put')
@@ -39,8 +39,8 @@
         </form>
       </div>
       <div class="updatePassword w-full bg-gray-100 rounded-lg border border-gray-200 p-5 flex flex-col gap-6">
-        <h1 class="text-xl font-medium ">Update Password</h1>
-        <p class="text-sm">Ensure to use a long, random password</p>
+        <h1 class="text-xl font-medium ">Modifier le mot de passe</h1>
+        <p class="text-sm">Assurez-vous d'utiliser un mot de passe long et aléatoire</p>
         <form action="{{ route('changePassword') }}" method="POST">
           @csrf
           @method('put')
