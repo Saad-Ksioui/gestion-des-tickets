@@ -30,7 +30,7 @@ class TicketAttribuer extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('saadks2004o@gmail.com', 'Saâd Ksioui'),
+            from: new Address('ticketroot@gmail.com', 'Admin'),
             subject: 'Nouveau ticket attribué',
         );
     }

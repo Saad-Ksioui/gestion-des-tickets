@@ -7,6 +7,7 @@ use App\Models\Ticket;
 use App\Models\Priorite;
 use App\Models\Categorie;
 use App\Models\Commentaire;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -72,6 +73,12 @@ class TechController extends Controller
             'user_id' => auth()->id(),
             'ticket_id' => $id
         ]);
+        $notification = new Notification();
+        $notification->user_id = auth()->id();
+        $notification->ticket_id = $id;
+        $notification->message = 'Votre ticket a été commenter';
+        $notification->type = 'ticket_comment';
+        $notification->save();
         return back()->with('success', 'Le commentaire a été ajouté');
     }
     public function deleteTechComment($id)

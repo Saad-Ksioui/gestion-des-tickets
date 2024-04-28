@@ -53,6 +53,20 @@ class AdminController extends Controller
         $users = User::where('id', '!=', $currentUserId)->paginate(5);
         return view('admin.User Management.list-users', compact('users'));
     }
+    public function deleteUser($id)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->role_id == 2) {
+            Ticket::where('assigned_to', $id)->update(['assigned_to' => null]);
+        } elseif ($user->role_id == 3) {
+            Ticket::where('user_id', $id)->delete();
+        }
+
+        $user->delete();
+
+        return redirect()->back()->with("warning", "L'utilisateur a été supprimé");
+    }
     //!/* Statut Management */
     public function listStatuts()
     {

@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/list-users', [AdminController::class, 'listUsers'])->name('list-users');
         Route::get('/create-user', [AdminController::class, 'createUser'])->name('create-user');
         Route::post('/store-user', [AdminController::class, 'storeUser'])->name('store-user');
+        Route::delete('/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('delete-user');
 
         //? Statut Management
         Route::get('/list-statuts', [AdminController::class, 'listStatuts'])->name('list-statuts');
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/ticket/{id}', [AdminController::class, 'showTicket'])->name('show-ticket');
         Route::get('/edit-ticket/{id}', [AdminController::class, 'editTicket'])->name('edit-ticket');
         Route::put('/update-ticket/{id}', [AdminController::class, 'updateTicket'])->name('update-ticket');
+        Route::delete('/delete-ticket/{id}', [AdminController::class, 'deleteTicket'])->name('delete-ticket');
 
         //? Comment Management
         Route::post('/store-comment/{id}', [AdminController::class, 'storeComment'])->name('store-comment');

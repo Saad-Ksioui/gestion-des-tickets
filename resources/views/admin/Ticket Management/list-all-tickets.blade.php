@@ -129,10 +129,16 @@
                   {{ $ticket->getAssignedTo('assigned_to') }}
                 </td>
                 <td
-                  class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider grid grid-cols-1 gap-2 text-center">
+                  class="px-6 py-3 text-base font-medium border border-gray-400 tracking-wider flex flex-col gap-2 text-center">
                   <a href="{{ route('edit-ticket', ['id' => $ticket->id]) }}"
                     class="text-white text-base font-medium bg-[#4DA845] rounded-lg">Edit</a>
-                  <a href="#" class="text-white text-base font-medium bg-[#DC3544] rounded-lg">Delete</a>
+                  <form action="{{ route('delete-ticket', ['id' => $ticket->id]) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="text-white text-base font-medium px-5 bg-[#DC3544] rounded-lg">
+                      Delete
+                    </button>
+                  </form>
                 </td>
               </tr>
             @endforeach
